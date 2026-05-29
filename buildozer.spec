@@ -9,6 +9,8 @@ package.name = minisudokemistry
 # (str) Package domain (needed for android packaging)
 package.domain = org.mol23
 
+version = 1.0
+
 # (str) Source code where the main.py lives
 source.dir = .
 
