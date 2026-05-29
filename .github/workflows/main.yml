@@ -7,31 +7,31 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04  # Força uma versão estável do Ubuntu
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4  # Atualizado para a versão estável mais recente
 
-    - name: Get Date
-      id: get-date
-      run: |
-        echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
-
-    - name: Cache Buildozer global directory
-      uses: actions/cache@v3
+    - name: Set up Python
+      uses: actions/setup-python@v5
       with:
-        path: ~/.buildozer
-        key: buildozer-global-${{ runner.os }}-${{ steps.get-date.outputs.date }}
+        python-data-dir: '3.10'
+
+    # Instalamos o Buildozer e dependências diretamente via terminal nativo
+    - name: Install Buildozer and Dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y git zip unzip openjdk-17-jdk python3-pip autoconf libtool pkg-config zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libreadline-dev libffi-dev libsqlite3-dev sqlite3 bzip2 libbz2-dev
+        pip3 install --user --upgrade buildozer cython virtualenv
 
     - name: Build with Buildozer
-      uses: ArtemShatalov/buildozer-action@v1
-      with:
-        command: buildozer android debug
-        buildozer_version: stable
+      run: |
+        export PATH=$PATH:~/.local/bin
+        buildozer android debug
 
     - name: Upload APK Artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4  # Corrigido para a versão V4 exigida pelo GitHub
       with:
         name: Mini-SudoKemistry-APK
         path: bin/*.apk
