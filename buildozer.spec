@@ -14,6 +14,8 @@ version = 1.0.0
 # Requisitos do sistema
 requirements = python3,pygame
 
+android.p4a_extra_args = --exclude-recipes=sdl2_mixer,fluidsynth,libmodplug
+
 orientation = portrait
 fullscreen = 1
 
