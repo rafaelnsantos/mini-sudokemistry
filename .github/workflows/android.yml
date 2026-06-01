@@ -27,6 +27,7 @@ jobs:
 
     - name: Compilar o APK com o Buildozer
       run: |
+        buildozer appclean
         # O "yes |" aceita automaticamente as licenças do Android SDK que aparecerem
         yes | buildozer -v android debug
 
