@@ -19,7 +19,7 @@ source.include_exts = py,png,jpg,kv,atlas,ttf
 
 # (list) Application requirements
 # Ensure python3 and pygame are here
-requirements = python3, pygame
+requirements = python3==3.10.12,pygame
 
 # (str) Supported orientations (valid options are: landscape, portrait, all)
 orientation = portrait

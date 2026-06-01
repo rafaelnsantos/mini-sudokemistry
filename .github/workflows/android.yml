@@ -7,16 +7,16 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22-04
 
     steps:
     - name: Baixar o código do repositório
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
 
     - name: Configurar o Python
       uses: actions/setup-python@v5
       with:
-        python-version: '3.10'
+        python-version: '3.10.12'
 
     - name: Instalar dependências do sistema Linux
       run: |
@@ -31,7 +31,7 @@ jobs:
         yes | buildozer -v android debug
 
     - name: Salvar o APK gerado
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v6
       with:
         name: Jogo-Android-APK
         path: bin/*.apk
